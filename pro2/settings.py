@@ -29,11 +29,11 @@ ALLOWED_HOSTS = []
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
 # In a Windows environment this must be set to your system time zone.
-TIME_ZONE = 'America/Chicago'
+TIME_ZONE = 'Europe/paris'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'fr-FR'
 
 SITE_ID = 1
 
@@ -108,6 +108,7 @@ ROOT_URLCONF = 'pro2.urls'
 WSGI_APPLICATION = 'pro2.wsgi.application'
 
 TEMPLATE_DIRS = (
+    "/Users/nassim/PYTHON/DJANGO/pro2/templates_html"
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -121,9 +122,10 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
+     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+    'blog'
 )
 
 # A sample logging configuration. The only tangible logging
@@ -154,3 +156,5 @@ LOGGING = {
         },
     }
 }
+
+APPEND_SLASH = True  # Ajoute un slash en fin d'URL
