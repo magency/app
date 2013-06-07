@@ -2,6 +2,8 @@
 #-*- coding: utf-8 -*-
 
 from django.http import HttpResponse, Http404
+from django.shortcuts import render, redirect
+from datetime import datetime
 
 def home(request):
   text = """<h1>WELCOME PAGE</h1>
@@ -17,7 +19,7 @@ def data(request):
 
 def view_object(request, id_object):
   #VIEW WHICH RETURNS AN OBJECT NUMBER
-  if not(int(id_object)): #Si l'ID est supérieur à 100, nous considérons que l'article n'existe pas
+  if (int(id_object))>100: #Si l'ID est supérieur à 100, nous considérons que l'article n'existe pas
         raise Http404
   text = "<p>Vous avez demandé l'object n°{0} !</p>".format(id_object)
   return HttpResponse(text)
@@ -26,3 +28,14 @@ def view_object_date(request, day, month, year):
   #Liste des articles d'un mois précis
   text = "Vous avez demandé l'object de la date {0}/{1}/{2}.".format(day, month, year)
   return HttpResponse(text)  
+
+def test_html(request): 
+  name="Nassim BENHARRAT"
+  current_date= datetime.now()
+  return render(request, 'blog/test.html', locals())
+
+def test_css(request):  
+  return render(request, 'blog/test_css.css')
+ 
+def test_image(request):  
+  return render(request, 'blog/nissan.jpg')

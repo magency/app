@@ -4,7 +4,7 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-     ('Nassim', 'nassim.benhara@gmail.com'),
+     ('Nassim', 'nassim.benharat@gmail.com'),
 )
 
 MANAGERS = ADMINS
@@ -65,10 +65,11 @@ STATIC_ROOT = ''
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
-STATIC_URL = '/static/'
+STATIC_URL = '/assets/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
+    "/Users/nassim/PYTHON/DJANGO/pro2/assets/",
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -108,7 +109,7 @@ ROOT_URLCONF = 'pro2.urls'
 WSGI_APPLICATION = 'pro2.wsgi.application'
 
 TEMPLATE_DIRS = (
-    "/Users/nassim/PYTHON/DJANGO/pro2/templates_html"
+    "/Users/nassim/PYTHON/DJANGO/pro2/templates_html/"
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
