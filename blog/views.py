@@ -34,8 +34,5 @@ def test_html(request):
   current_date= datetime.now()
   return render(request, 'blog/test.html', locals())
 
-def test_css(request):  
-  return render(request, 'blog/test_css.css')
- 
-def test_image(request):  
-  return render(request, 'blog/nissan.jpg')
+def generate_index(request): 
+  return render(request, 'blog/index.html')
