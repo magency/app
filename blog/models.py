@@ -23,5 +23,13 @@ class Object(models.Model):
     slug = models.SlugField(max_length=100)
 	
     def __unicode__(self):
-        return self.name
+        return self.slug
+
+class Contact(models.Model):
+    name = models.CharField(max_length=255)
+    adress = models.TextField()
+    photo = models.ImageField(upload_to="media/")
+ 
+    def __unicode__(self):
+       	return self.nom        
 

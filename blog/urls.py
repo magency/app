@@ -8,4 +8,6 @@ urlpatterns = patterns('blog.views',
                        url(r'^object/(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{2})/$', 'view_object_date'), #object view with view_object_date
                        url(r'^test.html$', 'test_html'),#test html object with template
                        url(r'^index.html$', 'generate_index'),#test html object with template
+                       url(r'^contact/$', 'contact'),
+                       url(r'^new-contact/$', 'new_contact'),
                        )

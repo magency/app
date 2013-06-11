@@ -4,7 +4,8 @@
 from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect
 from datetime import datetime
-from blog.models import Object
+from blog.models import *
+from blog.forms import *
 
 
 def home(request):
@@ -52,3 +53,44 @@ def read(request, id, slug):
   current_date= datetime.now()
 
   return render(request, 'blog/read_object.html', locals())  
+ 
+def contact(request):
+    if request.method == 'POST':  # S'il s'agit d'une requête POST
+        form = MessageForm(request.POST)  # Nous reprenons les données
+ 
+        if form.is_valid(): # Nous vérifions que les données envoyées sont valides
+ 
+            # Ici nous pouvons traiter les données du formulaire
+            subject = form.cleaned_data['subject']
+            message = form.cleaned_data['message']
+            sender = form.cleaned_data['sender']
+            returnMessage = form.cleaned_data['returnMessage']
+ 
+            # Nous pourrions ici envoyer l'e-mail grâce aux données que nous venons de récupérer
+ 
+            send = True
+ 
+    else: # Si ce n'est pas du POST, c'est probablement une requête GET
+        form = MessageForm()  # Nous créons un formulaire vide
+    name="Nassim BENHARRAT"
+    current_date= datetime.now()
+    return render(request, 'blog/contact.html', locals())
+
+def new_contact(request):
+    sauvegarde = False
+ 
+    if request.method == "POST":
+           form = NewContactForm(request.POST, request.FILES)
+           if form.is_valid():
+                   contact = Contact()
+                   contact.name = form.cleaned_data["name"]
+                   contact.adress = form.cleaned_data["adress"]
+                   contact.photo = form.cleaned_data["photo"]
+                   contact.save()
+ 
+                   sauvegarde = True
+    else:
+           form = NewContactForm()
+    name="Nassim BENHARRAT"
+    current_date= datetime.now() 
+    return render(request, 'blog/contact2.html',locals())    

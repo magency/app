@@ -1,0 +1,26 @@
+{% extends "blog/base.html" %}
+ 
+{% block title %}FORM PAGE{% endblock %}
+ 
+{% block content %}
+  <!-- NAVIGATION MENU -->
+
+  <!-- MAIN -->
+  
+  <h1>Ajouter un nouveau contact</h1>
+ 
+	{% if sauvegarde %}
+	    <p>Ce contact a bien été enregistré.</p>
+	{% endif %}
+	    
+	<p>
+	    <form method="post" enctype="multipart/form-data" action=".">
+	       {% csrf_token %}
+	       {{ form.as_p }}
+	       <input type="submit"/>
+	    </form>
+	</p>
+
+  <!-- Signer et dater la page, c'est une question de politesse! -->
+  <address>{{ current_date }}<br>By {{ name }}.</address>   
+{% endblock %}
