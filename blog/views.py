@@ -4,6 +4,8 @@
 from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect
 from datetime import datetime
+from blog.models import Object
+
 
 def home(request):
   text = """<h1>WELCOME PAGE</h1>
@@ -35,4 +37,18 @@ def test_html(request):
   return render(request, 'blog/test.html', locals())
 
 def generate_index(request): 
-  return render(request, 'blog/index.html')
+  name="Nassim BENHARRAT"
+  current_date= datetime.now()
+  obj = Object.objects.all() # Nous sélectionnons tous nos articles
+  return render(request, 'blog/index.html', locals())
+
+def read(request, id, slug):
+  try:
+    obj = Object.objects.get(id=id, slug=slug)
+  except Object.DoesNotExist:
+    raise Http404
+  
+  name="Nassim BENHARRAT"
+  current_date= datetime.now()
+
+  return render(request, 'blog/read_object.html', locals())  

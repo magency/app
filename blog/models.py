@@ -7,7 +7,7 @@ class MessageCategory(models.Model):
     name = models.CharField(max_length=30)
  
     def __unicode__(self):
-        return self.nom
+        return self.name
 
 class Message(models.Model):
 	title = models.CharField(max_length=100)
@@ -15,7 +15,13 @@ class Message(models.Model):
    	content = models.TextField(null=True)
    	date = models.DateTimeField(auto_now_add=True, auto_now=False, verbose_name="Post date")
  	category = models.ForeignKey('MessageCategory')
- 	
+
    	def __unicode__(self):
    	    return u"%s" % self.title
+
+class Object(models.Model):
+    slug = models.SlugField(max_length=100)
+	
+    def __unicode__(self):
+        return self.name
 
