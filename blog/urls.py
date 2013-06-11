@@ -6,8 +6,9 @@ urlpatterns = patterns('blog.views',
                        #url(r'^object/(?P<id_object>\d+)/$', 'view_object'), #object view
                        url(r'^object/(?P<id>\d+)-(?P<slug>.+)/$', 'read'), #object view
                        url(r'^object/(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{2})/$', 'view_object_date'), #object view with view_object_date
-                       url(r'^test.html$', 'test_html'),#test html object with template
+                       url(r'^$', 'test_html'),#test html object with template
                        url(r'^index.html$', 'generate_index'),#test html object with template
-                       url(r'^contact/$', 'contact'),
+                       url(r'^form/$', 'form_contact'),
                        url(r'^new-contact/$', 'new_contact'),
+                       url(r'^view-contacts/$', 'view_contacts'),
                        )

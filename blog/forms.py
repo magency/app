@@ -15,4 +15,4 @@ class MessageForm(forms.ModelForm):
 class NewContactForm(forms.Form):
     name = forms.CharField()
     adress = forms.CharField(widget=forms.Textarea)
-    photo = forms.ImageField()	
+    photo = forms.FileField()	

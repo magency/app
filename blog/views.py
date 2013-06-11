@@ -54,7 +54,7 @@ def read(request, id, slug):
 
   return render(request, 'blog/read_object.html', locals())  
  
-def contact(request):
+def form_contact(request):
     if request.method == 'POST':  # S'il s'agit d'une requête POST
         form = MessageForm(request.POST)  # Nous reprenons les données
  
@@ -93,4 +93,10 @@ def new_contact(request):
            form = NewContactForm()
     name="Nassim BENHARRAT"
     current_date= datetime.now() 
-    return render(request, 'blog/contact2.html',locals())    
+    return render(request, 'blog/contact2.html',locals())  
+
+def view_contacts(request):
+    name="Nassim BENHARRAT"
+    current_date= datetime.now()
+    contacts = Contact.objects.all()
+    return render(request, 'blog/view_contact.html', locals())      

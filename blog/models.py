@@ -28,7 +28,7 @@ class Object(models.Model):
 class Contact(models.Model):
     name = models.CharField(max_length=255)
     adress = models.TextField()
-    photo = models.ImageField(upload_to="media/")
+    photo = models.FileField(upload_to="media/")
  
     def __unicode__(self):
        	return self.nom        

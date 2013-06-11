@@ -4,6 +4,9 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib import admin
 admin.autodiscover()
 
+from django.conf.urls.static import static
+from django.conf import settings
+
 urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'pro2.views.home', name='home'),
@@ -17,3 +20,4 @@ urlpatterns = patterns('',
     url(r'', include('blog.urls')),
 )
 urlpatterns += staticfiles_urlpatterns()#for the import of staticfiles
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

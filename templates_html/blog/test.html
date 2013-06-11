@@ -5,17 +5,15 @@
 {% block content %}
  <!-- NAVIGATION MENU -->
   <ul class="navbar">
-    <li><a href="index.html">Home page</a>
-    <li><a href="news.html">News</a>
-    <li><a href="voiture.html">My Ride</a>
-    <li><a href="WoW.html">Who's Who ?</a>
-    <li><a href="http://www.peugeot.fr/" target="_blank">Official Website</a>
+    <li><a href="{% url "blog.views.test_html" %}">Home Page</a>
+    <li><a href="{% url "blog.views.view_contacts" %}">Contacts Existants</a>
+    <li><a href="{% url "blog.views.new_contact" %}">Ajouter un contact</a>
   </ul>
 
   <!-- MAIN -->
-  <h1>Nissan Latest Model : Note !</h1>
+  <h1>DJANGO ON RAILS !</h1>
   {% load static %}
-  <img src="{% static 'blog/nissan.jpg' %}" class="TestNissan" title ="Nissan" width="500" length="600" />
+  <img src="{% static 'blog/Django-Unchained.jpg' %}" class="TestNissan" title ="Nissan" width="500" length="600" />
 
   <!-- Signer et dater la page, c'est une question de politesse! -->
   <address>{{ current_date }}<br>By {{ name }}.</address>   
