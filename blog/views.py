@@ -1,12 +1,18 @@
 # Create your views here.
 #-*- coding: utf-8 -*-
-
 from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect
+from django.contrib.auth import logout, authenticate, login
+from django.core.urlresolvers import reverse
 from datetime import datetime
 from blog.models import *
 from blog.forms import *
+from django.contrib.auth.models import User
+from django import template
+from django.db import IntegrityError
+from django.template import VariableDoesNotExist
 
+global user
 
 def home(request):
   text = """<h1>WELCOME PAGE</h1>
@@ -96,7 +102,58 @@ def new_contact(request):
     return render(request, 'blog/contact2.html',locals())  
 
 def view_contacts(request):
+    global user
     name="Nassim BENHARRAT"
     current_date= datetime.now()
     contacts = Contact.objects.all()
-    return render(request, 'blog/view_contact.html', locals())      
+    return render(request, 'blog/view_contact.html', locals())    
+
+def subscribe(request):
+    if request.method == 'POST':  # S'il s'agit d'une requête POST
+        form = ProfileForm(request.POST)  # Nous reprenons les données
+
+        if form.is_valid(): # Nous vérifions que les données envoyées sont valides   
+            username = form.cleaned_data["username"] 
+            password1 = form.cleaned_data["password1"] 
+            password2 = form.cleaned_data["password2"]
+
+            
+            if password1==password2:
+              try: 
+                user = User.objects.create_user(username=username, password=password1)
+                user.save()
+                send = True
+              except IntegrityError:
+                notValidateUser= True
+            else:
+              notValidatePass= True  
+            
+    else: # Si ce n'est pas du POST, c'est probablement une requête GET
+        form = ProfileForm()  # Nous créons un formulaire vide
+    name="Nassim BENHARRAT"
+    current_date= datetime.now()
+    return render(request, 'blog/subscribe.html', locals())
+
+def connexion(request):
+    global user
+    error = False
+    if request.method == "POST":
+        form = ConnexionForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data["username"]  # Nous récupérons le nom d'utilisateur
+            password = form.cleaned_data["password"]  # … et le mot de passe
+            user = authenticate(username=username, password=password)  #Nous vérifions si les données sont correctes
+            if user:  # Si l'objet renvoyé n'est pas None
+                login(request, user)  # nous connectons l'utilisateur
+            else: #sinon une erreur sera affichée
+                error = True
+    else:
+        form = ConnexionForm()
+
+    name="Nassim BENHARRAT"
+    current_date= datetime.now()    
+    return render(request, 'blog/connexion.html',locals())      
+
+def deconnexion(request):                                                                               
+    logout(request) 
+    return redirect(reverse(connexion))    

@@ -1,13 +1,28 @@
 {% extends "blog/base.html" %}
  
-{% block title %}READ PAGE{% endblock %}
+{% block title %}authentication PAGE{% endblock %}
  
 {% block content %}
   <!-- NAVIGATION MENU -->
 
   <!-- MAIN -->
   
-  <p>Vous avez demandé l'object {{ obj.id }}</p>
+  <h1>SIGN IN</h1>
+ 
+	{% if error %}
+	<p><strong>Utilisateur inexistant ou mauvais mot de passe utilisé.</strong></p>
+	{% endif %}
+	 
+	{% if user.is_authenticated %}
+	Vous êtes connecté, {{ user.username }} ! <a href="{% url "blog.views.deconnexion" %}">Deconnexion</a>
+
+	{% else %}
+	<form method="post" action=".">
+	       {% csrf_token %}
+	       {{ form.as_p }}
+	    <input type="submit"/>
+	</form>
+	{% endif %}
 
 <ul class="navbar">
     <li><a href="{% url "blog.views.test_html" %}">Home Page</a>
@@ -16,6 +31,7 @@
     <li><a href="{% url "blog.views.subscribe" %}">SIGN UP</a>
     <li><a href="{% url "blog.views.connexion" %}">SIGN IN</a>
   </ul>
+
 
   <!-- Signer et dater la page, c'est une question de politesse! -->
   <address>{{ current_date }}<br>By {{ name }}.</address>   

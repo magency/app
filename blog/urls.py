@@ -11,4 +11,7 @@ urlpatterns = patterns('blog.views',
                        url(r'^form/$', 'form_contact'),
                        url(r'^new-contact/$', 'new_contact'),
                        url(r'^view-contacts/$', 'view_contacts'),
+                       url(r'^subscribe/$', 'subscribe'),
+                       url(r'^connexion/$', 'connexion'),
+                       url(r'^deconnexion/$', 'deconnexion'),
                        )
