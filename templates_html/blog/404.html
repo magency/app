@@ -1,38 +1,23 @@
 {% extends "blog/base.html" %}
  
-{% block title %}SUBSCRIBE PAGE{% endblock %}
+{% block title %}ALERT PAGE{% endblock %}
  
 {% block content %}
   <!-- NAVIGATION MENU -->
 
   <!-- MAIN -->
   
-  <h1>SIGN UP</h1>
-
-  {% if send %}
-    <strong>Inscription Réussie!</strong>
-  {% endif %}
   
-  {% if notValidateUser %}
-  	<strong>User already exists!</strong>
-  {% endif %}
+<p><strong>404 ERROR CODE : PAGE NOT FOUND</strong></p>
 
-  {% if notValidatePass %}
-    <strong>Passwords do not match!</strong>
-  {% endif %}
- 
-  <form action="{% url "blog.views.subscribe" %}" method="post">{% csrf_token %}
-  {{ form.as_p }}
-  <input type="submit" value="Valider" />
-  </form>
-
-  <ul class="navbar">
+<ul class="navbar">
     <li><a href="{% url "blog.views.test_html" %}">Home Page</a>
     <li><a href="{% url "blog.views.view_contacts" %}">Contacts Existants</a>
     <li><a href="{% url "blog.views.new_contact" %}">Ajouter un contact</a>
     <li><a href="{% url "blog.views.subscribe" %}">SIGN UP</a>
     <li><a href="{% url "blog.views.connexion" %}">SIGN IN</a>
   </ul>
+
 
   <!-- Signer et dater la page, c'est une question de politesse! -->
   <address>{{ current_date }}<br>By {{ name }}.</address>   

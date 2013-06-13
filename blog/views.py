@@ -1,7 +1,7 @@
 # Create your views here.
 #-*- coding: utf-8 -*-
 from django.http import HttpResponse, Http404
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, render_to_response
 from django.contrib.auth import logout, authenticate, login
 from django.core.urlresolvers import reverse
 from datetime import datetime
@@ -11,6 +11,9 @@ from django.contrib.auth.models import User
 from django import template
 from django.db import IntegrityError
 from django.template import VariableDoesNotExist
+from django.contrib.auth.decorators import login_required
+from django.http import *
+
 
 global user
 
@@ -82,6 +85,7 @@ def form_contact(request):
     current_date= datetime.now()
     return render(request, 'blog/contact.html', locals())
 
+@login_required(redirect_field_name='to')
 def new_contact(request):
     sauvegarde = False
  
@@ -101,6 +105,7 @@ def new_contact(request):
     current_date= datetime.now() 
     return render(request, 'blog/contact2.html',locals())  
 
+@login_required(redirect_field_name='to')
 def view_contacts(request):
     global user
     name="Nassim BENHARRAT"
@@ -124,7 +129,7 @@ def subscribe(request):
                 user.save()
                 send = True
               except IntegrityError:
-                notValidateUser= True
+                notValidateUser= True  
             else:
               notValidatePass= True  
             
@@ -142,7 +147,7 @@ def connexion(request):
         if form.is_valid():
             username = form.cleaned_data["username"]  # Nous récupérons le nom d'utilisateur
             password = form.cleaned_data["password"]  # … et le mot de passe
-            user = authenticate(username=username, password=password)  #Nous vérifions si les données sont correctes
+            user = authenticate(username=username, password=password)  #Nous vérifions si les données sont correctes 
             if user:  # Si l'objet renvoyé n'est pas None
                 login(request, user)  # nous connectons l'utilisateur
             else: #sinon une erreur sera affichée
@@ -157,3 +162,14 @@ def connexion(request):
 def deconnexion(request):                                                                               
     logout(request) 
     return redirect(reverse(connexion))    
+
+def sign_in_first(request):#not integrated yet in the code
+  name="Nassim BENHARRAT"
+  current_date= datetime.now()
+  return render(request, 'blog/alert.html', locals())  
+
+def say_hello(request):
+  if request.user.is_authenticated():
+    return HttpResponse("hello, {0} !".format(request.user.username))
+  return HttpResponse("Hello, anonymous.")  
+

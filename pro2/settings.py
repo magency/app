@@ -159,3 +159,5 @@ LOGGING = {
 }
 
 APPEND_SLASH = True  # Ajoute un slash en fin d'URL
+
+LOGIN_URL = '/alert/'
