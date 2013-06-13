@@ -1,6 +1,6 @@
 {% extends "blog/base.html" %}
  
-{% block title %}authentication PAGE{% endblock %}
+{% block title %}Authentication PAGE{% endblock %}
  
 {% block content %}
   <!-- NAVIGATION MENU -->
@@ -14,7 +14,7 @@
 	{% endif %}
 	 
 	{% if user.is_authenticated %}
-	Vous êtes connecté, {{ user.username }} ! <a href="{% url "blog.views.deconnexion" %}">Deconnexion</a>
+	Vous êtes connecté, <strong>{{ user.username }}</strong> ! <a href="{% url "blog.views.deconnexion" %}">Deconnexion</a>
 
 	{% else %}
 	<form method="post" action=".">
