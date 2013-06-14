@@ -8,5 +8,16 @@
 
   <body>
     {% block content %}{% endblock %}
+
+    <!-- NAVIGATION MENU -->
+
+    <ul class="navbar">
+    <li><a href="{% url "blog.views.test_html" %}">Home Page</a>
+    <li><a href="{% url "blog.views.view_contacts" %}">Contacts Existants</a>
+    <li><a href="{% url "blog.views.new_contact" %}">Ajouter un contact</a>
+    <li><a href="{% url "blog.views.subscribe" %}">SIGN UP</a>
+    <li><a href="{% url "blog.views.connexion" %}">SIGN IN</a>
+  </ul>
+
   </body>
 </html>
