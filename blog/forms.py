@@ -17,9 +17,9 @@ class ProfileForm(forms.Form):
 	password1 = forms.CharField(label="Password", widget=forms.PasswordInput)
 	password2 = forms.CharField(label="Confirm password", widget=forms.PasswordInput)
 
-class NewContactForm(forms.Form):
+class NewCommentForm(forms.Form):
     name = forms.CharField()
-    adress = forms.CharField(widget=forms.Textarea)
+    comment = forms.CharField(widget=forms.Textarea)
     photo = forms.FileField()	
 
 class ConnexionForm(forms.Form):

@@ -9,8 +9,8 @@ urlpatterns = patterns('blog.views',
                        url(r'^$', 'test_html'),#test html object with template
                        url(r'^index.html$', 'generate_index'),#test html object with template
                        url(r'^form/$', 'form_contact'),
-                       url(r'^new-contact/$', 'new_contact'),
-                       url(r'^view-contacts/$', 'view_contacts'),
+                       url(r'^new-contact/$', 'new_comment'),
+                       url(r'^view-contacts/$', 'view_comment'),
                        url(r'^subscribe/$', 'subscribe'),
                        url(r'^connexion/$', 'connexion'),
                        url(r'^deconnexion/$', 'deconnexion'),

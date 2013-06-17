@@ -86,31 +86,31 @@ def form_contact(request):
     return render(request, 'blog/contact.html', locals())
 
 @login_required(redirect_field_name='to')
-def new_contact(request):
+def new_comment(request):
     sauvegarde = False
  
     if request.method == "POST":
-           form = NewContactForm(request.POST, request.FILES)
+           form = NewCommentForm(request.POST, request.FILES)
            if form.is_valid():
-                   contact = Contact()
-                   contact.name = form.cleaned_data["name"]
-                   contact.adress = form.cleaned_data["adress"]
-                   contact.photo = form.cleaned_data["photo"]
-                   contact.save()
+                   com = Comment()
+                   com.name = form.cleaned_data["name"]
+                   com.comment = form.cleaned_data["adress"]
+                   com.photo = form.cleaned_data["photo"]
+                   com.save()
  
                    sauvegarde = True
     else:
-           form = NewContactForm()
+           form = NewCommentForm()
     name="Nassim BENHARRAT"
     current_date= datetime.now() 
     return render(request, 'blog/contact2.html',locals())  
 
 @login_required(redirect_field_name='to')
-def view_contacts(request):
+def view_comment(request):
     global user
     name="Nassim BENHARRAT"
     current_date= datetime.now()
-    contacts = Contact.objects.all()
+    comments = Comment.objects.all()
     return render(request, 'blog/view_contact.html', locals())    
 
 def subscribe(request):

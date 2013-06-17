@@ -1,13 +1,13 @@
 {% extends "blog/base.html" %}
  
-{% block title %}FORM PAGE{% endblock %}
+{% block title %}COMMENT PAGE{% endblock %}
  
 {% block content %}
   <!-- NAVIGATION MENU -->
 
   <!-- MAIN -->
 {% if user.is_authenticated %}
-  <h1>Ajouter un nouveau contact</h1>
+  <h1>Ajouter un nouveau commentaire</h1>
  
 	{% if sauvegarde %}
 	    <p>Ce contact a bien été enregistré.</p>

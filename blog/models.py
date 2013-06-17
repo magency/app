@@ -27,10 +27,10 @@ class Object(models.Model):
     def __unicode__(self):
         return self.slug
 
-class Contact(models.Model):
+class Comment(models.Model):
     name = models.CharField(max_length=255)
-    adress = models.TextField()
+    comment = models.TextField()
     photo = models.FileField(upload_to="media/")
  
     def __unicode__(self):
-       	return self.nom        
+       	return self.name        
