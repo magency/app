@@ -6,8 +6,7 @@
   <!-- NAVIGATION MENU -->
 
   <!-- MAIN -->
-{% if user.is_authenticated %}
-  <h1>Ajouter un nouveau commentaire</h1>
+  <h1>Add a comment</h1>
  
 	{% if sauvegarde %}
 	    <p>Ce contact a bien été enregistré.</p>
@@ -20,9 +19,6 @@
 	       <input type="submit"/>
 	    </form>
 	</p>
-{% else %}  
-  <p><strong>Connectez vous d'abord !</strong></p>
-{% endif %}	
 
 
   <!-- Signer et dater la page, c'est une question de politesse! -->

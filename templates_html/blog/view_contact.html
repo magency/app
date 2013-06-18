@@ -6,18 +6,13 @@
   <!-- NAVIGATION MENU -->
 
   <!-- MAIN -->
-  {% if user.is_authenticated %}
-    <h1>Liste des commentarires</h1>
+    <h1>Comments posted</h1>
  
     {% for com in comments %}
         <h2>{{ com.name }}</h2>
         Adresse : {{ com.comment }}
         <p><img src="{{ MEDIA_URL }}{{ com.photo }}" width="200" length="200"/></p>
     {% endfor %}
-  
-  {% else %}    
-    <p><strong>Connectez vous d'abord !</strong></p>
-  {% endif %}
   
   <!-- Signer et dater la page, c'est une question de politesse! -->
   <address>{{ current_date }}<br>By {{ name }}.</address>   

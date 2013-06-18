@@ -11,11 +11,10 @@ from django.contrib.auth.models import User
 from django import template
 from django.db import IntegrityError
 from django.template import VariableDoesNotExist
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.http import *
+from django.contrib import messages
 
-
-global user
 
 def home(request):
   text = """<h1>WELCOME PAGE</h1>
@@ -92,13 +91,18 @@ def new_comment(request):
     if request.method == "POST":
            form = NewCommentForm(request.POST, request.FILES)
            if form.is_valid():
-                   com = Comment()
-                   com.name = form.cleaned_data["name"]
-                   com.comment = form.cleaned_data["adress"]
-                   com.photo = form.cleaned_data["photo"]
-                   com.save()
- 
-                   sauvegarde = True
+                  com = Comment()
+                  com.name = form.cleaned_data["name"]
+                  com.comment = form.cleaned_data["adress"]
+                  com.photo = form.cleaned_data["photo"]
+                  com.save()
+
+                  content_type = ContentType.objects.get(app_label='blog', model='Comment')
+                  permission = Permission.objects.create(codename='view_comments'.format(com.id), name='View comments' ,content_type=content_type)
+                  
+                  sauvegarde = True
+                  user = User.objects.get_user(username='NASSIM')
+                  user.user_permissions.add(permission)
     else:
            form = NewCommentForm()
     name="Nassim BENHARRAT"
@@ -106,8 +110,8 @@ def new_comment(request):
     return render(request, 'blog/contact2.html',locals())  
 
 @login_required(redirect_field_name='to')
+@permission_required('blog.view_comments', login_url='/alert/')
 def view_comment(request):
-    global user
     name="Nassim BENHARRAT"
     current_date= datetime.now()
     comments = Comment.objects.all()
@@ -140,7 +144,6 @@ def subscribe(request):
     return render(request, 'blog/subscribe.html', locals())
 
 def connexion(request):
-    global user
     error = False
     if request.method == "POST":
         form = ConnexionForm(request.POST)
@@ -148,6 +151,7 @@ def connexion(request):
             username = form.cleaned_data["username"]  # Nous récupérons le nom d'utilisateur
             password = form.cleaned_data["password"]  # … et le mot de passe
             user = authenticate(username=username, password=password)  #Nous vérifions si les données sont correctes 
+            messages.info(request, u'Bonjour !')
             if user:  # Si l'objet renvoyé n'est pas None
                 login(request, user)  # nous connectons l'utilisateur
             else: #sinon une erreur sera affichée

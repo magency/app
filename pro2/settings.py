@@ -29,11 +29,11 @@ ALLOWED_HOSTS = []
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
 # In a Windows environment this must be set to your system time zone.
-TIME_ZONE = 'Europe/paris'
+TIME_ZONE = 'America/Chicago'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'fr-FR'
+LANGUAGE_CODE = 'en-us'
 
 SITE_ID = 1
 
@@ -124,10 +124,12 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
-    # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
+    #Uncomment the next line to enable admin documentation:
+    'django.contrib.admindocs',
     'blog',
     'registration',
+    'django.contrib.sites',
+    'django.contrib.flatpages',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -161,4 +163,13 @@ LOGGING = {
 
 APPEND_SLASH = True  # Ajoute un slash en fin d'URL
 
-LOGIN_URL = '/alert/'
+LOGIN_URL = '/connexion/'
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': '/Users/nassim/PYTHON/DJANGO/pro2/CACHES',
+    }
+}
+
+SERVER_EMAIL = 'benharrat.nassim@gmail.com'

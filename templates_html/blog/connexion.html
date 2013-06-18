@@ -13,6 +13,15 @@
 	<p><strong>Utilisateur inexistant ou mauvais mot de passe utilisé.</strong></p>
 	{% endif %}
 	 
+
+	{% if messages %}
+	<ul class="messages">
+	    {% for message in messages %}
+	    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+	    {% endfor %}
+	</ul>
+	{% endif %}
+ 
 	{% if user.is_authenticated %}
 	Vous êtes connecté, <strong>{{ user.username }}</strong> ! <a href="{% url "blog.views.deconnexion" %}">Deconnexion</a>
 

@@ -6,8 +6,11 @@
 
   <!-- MAIN -->
   
-  
-<p><strong>Hello, anonymous, you've to sign in first.</strong></p>
+{% if not perms.blog.view_comments %}
+	<p><strong>Hello, {{user.username}}</strong></p>
+	<p><strong>Only superuser has the rights to see comments.</strong></p>
+{% endif %}
+
 
 
   <!-- Signer et dater la page, c'est une question de politesse! -->

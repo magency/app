@@ -1,6 +1,8 @@
 #-*- coding: utf-8 -*-
 from django.db import models
 from django.contrib.auth.models import User
+from datetime import datetime
+
 
 
 # Create your models here.
@@ -33,4 +35,13 @@ class Comment(models.Model):
     photo = models.FileField(upload_to="media/")
  
     def __unicode__(self):
-       	return self.name        
+       	return self.name
+
+    def is_recent(self):
+        "Return true if the comment is posted in the last 30 days"
+        return (datetime.now()-self.date).days < 30    
+
+    class Meta:
+        permissions = (
+                ("view_comments","comments"),
+        )            
