@@ -33,8 +33,11 @@ class GitClass:
 		print '\nIn progress...'
 		clone= git.Repo.clone_from(source, target)
 		
+		#REMOTE BRANCHES
 		self.branch= clone.git.branch(r=True)
 		self.remotes=[remote.strip() for remote in self.branch.splitlines()]
+		print '\nRemote branches'
+		print self.remotes
 
 		#MAKING DEB PACKAGE
 		print '\nMaking Debian package'
@@ -46,6 +49,8 @@ class GitClass:
 		print repo.git.status()
 		print '\nList of branches'
 		print repo.git.branch()
-#TEST 	 	
-instance= GitClass()
-instance.git_clone(instance.source, instance.target, instance.deb, instance.ver)
+#TEST 
+#git://gitorious.org/git-python/mainline.git
+#git@git.magency.fr:nassim/rapport-de-stage.git	 	
+#instance= GitClass()
+#instance.git_clone(instance.source, instance.target, instance.deb, instance.ver)
