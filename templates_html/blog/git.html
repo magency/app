@@ -8,16 +8,20 @@
   <!-- MAIN -->
   <h1>GIT CLONE</h1>
 
+  <p>{{exception}}</p> 
+
   {% if send %}
   <p><strong>Votre clone a bien été déposé !</strong></p>
   <p><strong>Listes des branches distantes :</strong></p>
 	  {%for remote in git_instance.remotes %}
 	        <li>{{ remote }}</li>
-	  {% endfor %}      
+	  {% endfor %} 
   {% endif %}
  
-  <form action="{% url "blog.views.git_form" %}" method="post">{% csrf_token %}
-  {{ form.as_p }}
+  <form action="{% url "blog.views.git_form" %}" method="post">
+  {% csrf_token %}
+  {{ form.as_p }}        
+
   <input type="submit" value="Valider clone" />
   </form>
 

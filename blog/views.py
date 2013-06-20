@@ -179,6 +179,7 @@ def say_hello(request):
   return HttpResponse("Hello, anonymous.")  
 
 def git_form(request):
+    exception=""
     if request.method == 'POST':  # S'il s'agit d'une requête POST
         form = GitForm(request.POST.copy())  # Nous reprenons les données
  
@@ -194,15 +195,14 @@ def git_form(request):
             try:
               git_instance.git_clone(source, target, debian, version)
             except GitCommandError:
-              print "lol"  
+              exception="GIT url is not valid !!"  
+              print exception
             # Nous pourrions ici envoyer l'e-mail grâce aux données que nous venons de récupérer
-            form.data['source'] = None
-            form.data['target'] = None
-            form.data['debian'] = None
-            form.data['version'] = None
 
-
-            send = True
+            if(exception==""):
+              send = True
+            else:
+              send= False  
  
     else: # Si ce n'est pas du POST, c'est probablement une requête GET
         form = GitForm()  # Nous créons un formulaire vide
