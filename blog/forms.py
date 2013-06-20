@@ -12,6 +12,10 @@ class MessageForm(forms.ModelForm):
 	class Meta:
 		model = Message
 
+class GitForm(forms.ModelForm):
+	class Meta:
+		model = Git
+
 class ProfileForm(forms.Form):
 	username = forms.CharField(label="Username", max_length=30)
 	password1 = forms.CharField(label="Password", widget=forms.PasswordInput)

@@ -15,4 +15,5 @@ urlpatterns = patterns('blog.views',
                        url(r'^connexion/$', 'connexion'),
                        url(r'^deconnexion/$', 'deconnexion'),
                        url(r'^alert/$', 'sign_in_first'),
+                       url(r'^git/$', 'git_form'),
                        )

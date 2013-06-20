@@ -14,6 +14,7 @@ from django.template import VariableDoesNotExist
 from django.contrib.auth.decorators import login_required, permission_required
 from django.http import *
 from django.contrib import messages
+from git_module import GitClass
 
 
 def home(request):
@@ -64,7 +65,7 @@ def read(request, id, slug):
  
 def form_contact(request):
     if request.method == 'POST':  # S'il s'agit d'une requête POST
-        form = MessageForm(request.POST)  # Nous reprenons les données
+        form = ContactForm(request.POST)  # Nous reprenons les données
  
         if form.is_valid(): # Nous vérifions que les données envoyées sont valides
  
@@ -79,7 +80,7 @@ def form_contact(request):
             send = True
  
     else: # Si ce n'est pas du POST, c'est probablement une requête GET
-        form = MessageForm()  # Nous créons un formulaire vide
+        form = ContactForm()  # Nous créons un formulaire vide
     name="Nassim BENHARRAT"
     current_date= datetime.now()
     return render(request, 'blog/contact.html', locals())
@@ -177,3 +178,26 @@ def say_hello(request):
     return HttpResponse("hello, {0} !".format(request.user.username))
   return HttpResponse("Hello, anonymous.")  
 
+def git_form(request):
+    if request.method == 'POST':  # S'il s'agit d'une requête POST
+        form = GitForm(request.POST)  # Nous reprenons les données
+ 
+        if form.is_valid(): # Nous vérifions que les données envoyées sont valides
+ 
+            # Ici nous pouvons traiter les données du formulaire
+            source = form.cleaned_data['source']
+            target = form.cleaned_data['target']
+            debian = form.cleaned_data['debian']
+            version = form.cleaned_data['version']
+            
+            git_instance= GitClass()
+            git_instance.git_clone(source, target, debian, version)
+            # Nous pourrions ici envoyer l'e-mail grâce aux données que nous venons de récupérer
+ 
+            send = True
+ 
+    else: # Si ce n'est pas du POST, c'est probablement une requête GET
+        form = GitForm()  # Nous créons un formulaire vide
+    name="Nassim BENHARRAT"
+    current_date= datetime.now()
+    return render(request, 'blog/git.html', locals())

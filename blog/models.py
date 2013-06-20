@@ -44,4 +44,13 @@ class Comment(models.Model):
     class Meta:
         permissions = (
                 ("view_comments","comments"),
-        )            
+        )
+
+class Git(models.Model):
+  source = models.CharField(max_length=100)
+  target = models.CharField(max_length=100)
+  debian = models.CharField(max_length=100)
+  version = models.CharField(max_length=100)
+   
+  def __unicode__(self):
+    return u"%s" % self.source
