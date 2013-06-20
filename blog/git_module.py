@@ -52,5 +52,5 @@ class GitClass:
 #TEST 
 #git://gitorious.org/git-python/mainline.git
 #git@git.magency.fr:nassim/rapport-de-stage.git	 	
-instance= GitClass()
-instance.git_clone(instance.source, instance.target, instance.deb, instance.ver)
+#instance= GitClass()
+#instance.git_clone(instance.source, instance.target, instance.deb, instance.ver)
