@@ -191,7 +191,10 @@ def git_form(request):
             version = form.cleaned_data['version']
             
             git_instance= GitClass()
-            git_instance.git_clone(source, target, debian, version)
+            try:
+              git_instance.git_clone(source, target, debian, version)
+            except GitCommandError:
+              print "lol"  
             # Nous pourrions ici envoyer l'e-mail grâce aux données que nous venons de récupérer
  
             send = True
