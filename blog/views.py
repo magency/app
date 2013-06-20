@@ -15,7 +15,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.http import *
 from django.contrib import messages
 from git_module import GitClass
-
+from git import *
 
 def home(request):
   text = """<h1>WELCOME PAGE</h1>
@@ -180,7 +180,7 @@ def say_hello(request):
 
 def git_form(request):
     if request.method == 'POST':  # S'il s'agit d'une requête POST
-        form = GitForm(request.POST)  # Nous reprenons les données
+        form = GitForm(request.POST.copy())  # Nous reprenons les données
  
         if form.is_valid(): # Nous vérifions que les données envoyées sont valides
  
@@ -196,7 +196,12 @@ def git_form(request):
             except GitCommandError:
               print "lol"  
             # Nous pourrions ici envoyer l'e-mail grâce aux données que nous venons de récupérer
- 
+            form.data['source'] = None
+            form.data['target'] = None
+            form.data['debian'] = None
+            form.data['version'] = None
+
+
             send = True
  
     else: # Si ce n'est pas du POST, c'est probablement une requête GET
